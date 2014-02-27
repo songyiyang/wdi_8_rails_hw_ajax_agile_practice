@@ -3,18 +3,11 @@
 <% end %>
 
 <!-- START_HIGHLIGHT -->
-<h2>Your Cart</h2>
+<% unless cart.line_items.empty? %>
 <table>
+<div class='cart_title'>Your Cart</div>
 <!-- END_HIGHLIGHT -->
-  <% @cart.line_items.each do |item| %>
-<!-- START_HIGHLIGHT -->
-    <tr>
-      <td><%= item.quantity %>&times;</td>
-      <td><%= item.product.title %></td>
-      <td class="item_price"><%= number_to_currency(item.total_price) %></td>
-    </tr>
-<!-- END_HIGHLIGHT -->
-  <% end %>
+<%= render(@cart) %>
 
 <!-- START_HIGHLIGHT -->
   <tr class="total_line">
@@ -28,3 +21,5 @@
 
 <%= button_to 'Empty cart', @cart, method: :delete,
     data: { confirm: 'Are you sure?' } %>
+
+<% end %>
